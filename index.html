@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safety of LLM Agents: From Single Agents to Multi-Agent Societies (NAACL 2027 Tutorial)</title>
+<meta name="description" content="Tutorial on the safety of LLM agents, from single agents to multi-agent societies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="inner">
+    <a href="#overview">Overview</a>
+    <a href="#outline">Outline</a>
+    <a href="#presenters">Presenters</a>
+    <a href="#reading">Reading List</a>
+  </div>
+</nav>
+
+<header class="banner">
+  <!-- Decorative: one agent → a few agents → a society -->
+  <svg class="banner-art" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="edges">
+      <line x1="480" y1="70" x2="540" y2="140"/><line x1="540" y1="140" x2="490" y2="200"/><line x1="480" y1="70" x2="490" y2="200"/>
+      <line x1="640" y1="50" x2="700" y2="110"/><line x1="700" y1="110" x2="660" y2="180"/><line x1="660" y1="180" x2="740" y2="210"/>
+      <line x1="700" y1="110" x2="780" y2="80"/><line x1="780" y1="80" x2="840" y2="140"/><line x1="840" y1="140" x2="740" y2="210"/>
+      <line x1="700" y1="110" x2="840" y2="140"/><line x1="640" y1="50" x2="780" y2="80"/><line x1="610" y1="150" x2="660" y2="180"/>
+      <line x1="610" y1="150" x2="700" y2="110"/><line x1="840" y1="140" x2="880" y2="60"/><line x1="780" y1="80" x2="880" y2="60"/>
+    </g>
+    <g class="nodes">
+      <circle cx="380" cy="130" r="9"/>
+      <circle cx="480" cy="70" r="7"/><circle cx="540" cy="140" r="7"/><circle cx="490" cy="200" r="7"/>
+      <circle cx="640" cy="50" r="5"/><circle cx="700" cy="110" r="5"/><circle cx="660" cy="180" r="5"/><circle cx="740" cy="210" r="5"/>
+      <circle cx="780" cy="80" r="5"/><circle cx="840" cy="140" r="5"/><circle cx="610" cy="150" r="5"/><circle cx="880" cy="60" r="5"/>
+    </g>
+    <circle class="alert" cx="700" cy="110" r="5"/>
+  </svg>
+
+  <div class="inner">
+    <!-- TODO: venue, date, location -->
+    <p class="venue">NAACL 2027 Tutorial &middot; Date TBA &middot; Location TBA</p>
+    <h1>Safety of LLM Agents</h1>
+    <p class="subtitle">From Single Agents to Multi-Agent Societies</p>
+  </div>
+</header>
+
+
+<main>
+
+<section id="overview">
+  <h2>Overview</h2>
+  <p class="lead">Large language models (LLMs) are increasingly deployed as <em>agents</em> that browse the web, call tools, write and execute code, keep persistent memory, and collaborate with other agents to complete long and complex tasks.</p>
+  <p>This shift from generating text to taking actions introduces safety risks that do not appear in chat settings. An agent may drift from its goal, take irreversible actions, follow instructions hidden in a web page or a tool description, or store harmful information in memory that affects future sessions. When many agents interact, new failures arise from their interaction itself, such as conformity, error propagation, collusion, and cascading attacks, and these risks can be further amplified in large-scale agent societies.</p>
+  <p>This tutorial provides a structured overview of this rapidly growing area. We organize agent safety along two dimensions: the <em>scale</em> of the system (single agents, multi-agent systems, and agent societies) and the <em>source</em> of the risk (non-adversarial failures that arise from agents' own behavior versus adversarial threats introduced by attackers). For each part, we cover representative risks, evaluation methods, and mitigation strategies, and we highlight open problems.</p>
+</section>
+
+<section id="outline">
+  <h2>Outline</h2>
+  <p>The tutorial is 3.5 hours long, including a 30-minute break, and covers agent safety at three scales: single agents, multi-agent systems, and large-scale agent societies.</p>
+  <!-- TODO: fill in times, presenters, and slide links -->
+  <ol class="schedule">
+    <li>
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title">Introduction <span class="dur">20 min</span></div>
+      </div>
+      <span class="link">Slides</span>
+    </li>
+    <li>
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title"><span class="part">Part I</span>Single-Agent Safety <span class="dur">60 min</span></div>
+        <ul>
+          <li><span class="tag na">Non-adversarial</span>Non-adversarial single-agent safety</li>
+          <li><span class="tag adv">Adversarial</span>Adversarial single-agent safety</li>
+          <li><span class="tag sg">Safeguards</span>Oversight, corrigibility, and safeguards</li>
+        </ul>
+      </div>
+      <span class="link">Slides</span>
+    </li>
+    <li class="break">
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title">Coffee Break <span class="dur">30 min</span></div>
+      </div>
+      <span class="link"></span>
+    </li>
+    <li>
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title"><span class="part">Part II</span>Multi-Agent Safety <span class="dur">70 min</span></div>
+        <ul>
+          <li><span class="tag na">Non-adversarial</span>Non-adversarial multi-agent safety</li>
+          <li><span class="tag adv">Adversarial</span>Adversarial multi-agent safety</li>
+        </ul>
+      </div>
+      <span class="link">Slides</span>
+    </li>
+    <li>
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title"><span class="part">Part III</span>Emergent Risks in Large-Scale Agent Societies <span class="dur">20 min</span></div>
+      </div>
+      <span class="link">Slides</span>
+    </li>
+    <li>
+      <span class="time">TBA</span>
+      <div class="body">
+        <div class="title">Conclusion &amp; Q&amp;A <span class="dur">10 min</span></div>
+      </div>
+      <span class="link">Slides</span>
+    </li>
+  </ol>
+</section>
+
+<section id="presenters">
+  <h2>Presenters</h2>
+  <div class="people">
+    <div class="person">
+      <a href="https://khhuang.me/"><img src="img/kuan-hao-huang.jpg" alt="Kuan-Hao Huang"></a>
+      <a class="name" href="https://khhuang.me/">Kuan-Hao Huang</a>
+      <span class="aff">Texas A&amp;M University</span>
+    </div>
+    <div class="person">
+      <a href="https://hanjiechen.github.io/"><img src="img/hanjie-chen.jpg" alt="Hanjie Chen"></a>
+      <a class="name" href="https://hanjiechen.github.io/">Hanjie Chen</a>
+      <span class="aff">Rice University</span>
+    </div>
+    <div class="person">
+      <a href="https://hjznlp.github.io/"><img src="img/huajian-zhang.jpg" alt="Huajian Zhang"></a>
+      <a class="name" href="https://hjznlp.github.io/">Huajian Zhang</a>
+      <span class="aff">Stony Brook University</span>
+    </div>
+    <div class="person">
+      <a href="https://joezhouai.com/"><img src="img/jiawei-zhou.jpg" alt="Jiawei Zhou"></a>
+      <a class="name" href="https://joezhouai.com/">Jiawei Zhou</a>
+      <span class="aff">Stony Brook University</span>
+    </div>
+  </div>
+</section>
+
+<section id="reading">
+  <h2>Reading List</h2>
+  <!-- TODO: add papers. Format: <li><a href="URL">Title</a>. Authors. <span class="venue-tag">Venue Year</span></li> -->
+  <h3>Single Agents</h3>
+  <ul class="papers">
+    <li class="tba">TBA</li>
+  </ul>
+  <h3>Multi-Agent Systems</h3>
+  <ul class="papers">
+    <li class="tba">TBA</li>
+  </ul>
+  <h3>Agent Societies</h3>
+  <ul class="papers">
+    <li class="tba">TBA</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    Contact: khhuang@tamu.edu &middot; hanjie@rice.edu &middot; jiawei.zhou.1@stonybrook.edu
+  </div>
+</footer>
+
+</body>
+</html>
